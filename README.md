@@ -34,13 +34,23 @@ scripts/flash_package.sh /dev/ttyACM0 test.zip
 
 ## Security
 
-This bootloader does not provide any security on updates. Even though the
-packages are signed that signature is not checked by the bootloader. So
+This bootloader does not provide any security for firmware updates. Even though
+the packages are signed that signature is not checked by the bootloader. So
 basically anyone with physical access to your device can flash any firmware.
 
-If you really need/want signature checks, feel free to port the _Secure
-Bootloader_ for the T-Echo based on this version **and generate your own
-private key**.
+For simplicity (to make the scripts above directly usable) a default private
+key, which is used to sign the packages, is provided in this repository.
+
+However, when the bootloader itself is update through DFU, the signature _is_
+checked. So, if you want to make sure only you can overwrite the bootloader via
+USB, you must not use the default key and [generate your own
+keypair](https://infocenter.nordicsemi.com/topic/ug_nrfutil/UG/nrfutil/nrfutil_keys_generate_display.html)
+instead.
+
+If you really need/want signature checks for regular firmware updates, feel
+free to port the [Secure
+Bootloader](https://infocenter.nordicsemi.com/topic/sdk_nrf5_v17.1.0/ble_sdk_app_secure_bootloader.html)
+for the T-Echo based on this version **and generate your own keypair**.
 
 ## License
 
